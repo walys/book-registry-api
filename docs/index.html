@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Book Registry API | Documentation</title>
+
+    <!-- Bootstrap 3 -->
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    >
+
+    <style>
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+            color: #333;
+            background-color: #f5f7fa;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            border-radius: 0;
+            border: 0;
+            background-color: #202c39;
+        }
+
+        .navbar-default .navbar-brand,
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;
+        }
+
+        .navbar-default .navbar-brand {
+            font-weight: bold;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-brand:hover {
+            color: #5bc0de;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: #657383;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #fff;
+        }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #354657;
+        }
+
+        .hero {
+            padding: 45px 35px;
+            margin-bottom: 30px;
+            color: #fff;
+            background: linear-gradient(135deg, #243b55, #141e30);
+            border-radius: 8px;
+        }
+
+        .hero h1 {
+            margin-top: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            color: #dce4ec;
+            font-size: 17px;
+        }
+
+        .hero .label {
+            display: inline-block;
+            margin: 5px 3px 0 0;
+            padding: 7px 10px;
+            font-size: 12px;
+        }
+
+        .doc-section {
+            padding: 28px;
+            margin-bottom: 25px;
+            background: #fff;
+            border: 1px solid #e5e9ef;
+            border-radius: 7px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+            scroll-margin-top: 80px;
+        }
+
+        .doc-section h2 {
+            margin-top: 0;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            font-size: 25px;
+            font-weight: bold;
+            border-bottom: 2px solid #e9eef4;
+        }
+
+        .doc-section h3 {
+            margin-top: 25px;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .feature-card {
+            min-height: 115px;
+            padding: 18px;
+            margin-bottom: 15px;
+            background: #f7f9fc;
+            border: 1px solid #e5eaf0;
+            border-radius: 6px;
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            font-weight: bold;
+        }
+
+        pre {
+            padding: 18px;
+            color: #e6edf3;
+            background-color: #202c39;
+            border: 0;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        code {
+            color: #c7254e;
+            background-color: #f9f2f4;
+        }
+
+        pre code {
+            color: inherit;
+            background: transparent;
+        }
+
+        .table-responsive {
+            border: 0;
+        }
+
+        .table > thead > tr > th {
+            background-color: #f0f4f8;
+        }
+
+        .http-badge {
+            display: inline-block;
+            min-width: 58px;
+            padding: 4px 7px;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .get { background: #337ab7; }
+        .post { background: #5cb85c; }
+        .put { background: #f0ad4e; }
+        .patch { background: #8e6bbf; }
+        .delete { background: #d9534f; }
+
+        .note {
+            padding: 14px 17px;
+            margin: 18px 0;
+            background: #eef7fc;
+            border-left: 4px solid #337ab7;
+            border-radius: 3px;
+        }
+
+        .warning {
+            padding: 14px 17px;
+            margin: 18px 0;
+            background: #fcf8e3;
+            border-left: 4px solid #f0ad4e;
+            border-radius: 3px;
+        }
+
+        .footer {
+            padding: 20px 0;
+            color: #777;
+            text-align: center;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .hero {
+                padding: 30px 22px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .doc-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button
+                    type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#documentation-navbar"
+                    aria-expanded="false"
+                >
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="#top">Book Registry API</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="documentation-navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#tech-stack">Tech Stack</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#authentication">Authentication</a></li>
+                    <li><a href="#endpoints">Endpoints</a></li>
+                    <li><a href="#validation">Validation</a></li>
+                    <li><a href="#tests">Tests</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Hero -->
+        <header class="hero">
+            <h1>Book Registry API</h1>
+
+            <p>
+                A RESTful API built with Laravel for managing books,
+                featuring token-based authentication, CRUD operations,
+                input validation, and user-specific data access.
+            </p>
+
+            <span class="label label-info">Laravel</span>
+            <span class="label label-success">PHP 8.3</span>
+            <span class="label label-primary">REST API</span>
+            <span class="label label-default">Sanctum</span>
+        </header>
+
+        <!-- Features -->
+        <section class="doc-section" id="features">
+            <h2><span class="glyphicon glyphicon-star"></span> Features</h2>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="feature-card">
+                        <h4>Token Authentication</h4>
+                        <p>Secure login and logout using Laravel Sanctum.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="feature-card">
+                        <h4>Book Management</h4>
+                        <p>Create, list, view, update, and delete books.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="feature-card">
+                        <h4>Input Validation</h4>
+                        <p>Dedicated Form Requests validate incoming data.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="feature-card">
+                        <h4>Data Ownership</h4>
+                        <p>Users can access and manage only their own books.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="feature-card">
+                        <h4>JSON Responses</h4>
+                        <p>API responses use JSON, including validation errors.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="feature-card">
+                        <h4>Automated Tests</h4>
+                        <p>Feature tests cover authentication, CRUD, and validation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="doc-section" id="tech-stack">
+            <h2><span class="glyphicon glyphicon-wrench"></span> Tech Stack</h2>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>PHP 8.3</td><td>Backend programming language</td></tr>
+                        <tr><td>Laravel 13</td><td>Application framework</td></tr>
+                        <tr><td>Laravel Sanctum</td><td>Token-based authentication</td></tr>
+                        <tr><td>MySQL</td><td>Development database</td></tr>
+                        <tr><td>SQLite</td><td>In-memory database for automated tests</td></tr>
+                        <tr><td>PHPUnit</td><td>Automated testing</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Requirements -->
+        <section class="doc-section" id="requirements">
+            <h2><span class="glyphicon glyphicon-check"></span> Requirements</h2>
+
+            <ul>
+                <li>PHP 8.3 or a version compatible with the project dependencies.</li>
+                <li>Composer.</li>
+                <li>MySQL for the development database.</li>
+                <li>Required PHP extensions specified by Laravel and Composer.</li>
+            </ul>
+        </section>
+
+        <!-- Installation -->
+        <section class="doc-section" id="installation">
+            <h2><span class="glyphicon glyphicon-download-alt"></span> Installation</h2>
+
+            <h3>1. Clone the repository</h3>
+            <pre><code>git clone YOUR_REPOSITORY_URL
+cd book-registry-api</code></pre>
+
+            <div class="warning">
+                Replace <code>YOUR_REPOSITORY_URL</code> with the actual URL
+                of your Git repository.
+            </div>
+
+            <h3>2. Install dependencies</h3>
+            <pre><code>composer install</code></pre>
+
+            <h3>3. Configure the environment</h3>
+            <pre><code>cp .env.example .env
+php artisan key:generate</code></pre>
+
+            <p>
+                On Windows, you can also copy <code>.env.example</code>
+                manually and rename the copy to <code>.env</code>.
+            </p>
+
+            <h3>4. Configure the database</h3>
+
+            <p>
+                Update the database settings in your <code>.env</code> file.
+                For example:
+            </p>
+
+            <pre><code>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=book_registry_api
+DB_USERNAME=root
+DB_PASSWORD=</code></pre>
+
+            <p>Create the database before running the migrations.</p>
+
+            <h3>5. Run migrations and seeders</h3>
+            <pre><code>php artisan migrate
+php artisan db:seed</code></pre>
+
+            <p>
+                The seeder creates the development user configured by the project.
+                Check the seeder source for the credentials used.
+            </p>
+
+            <h3>6. Start the development server</h3>
+            <pre><code>php artisan serve</code></pre>
+
+            <p>
+                Base URL:
+                <code>http://127.0.0.1:8000</code>
+            </p>
+
+            <div class="warning">
+                Never commit your <code>.env</code> file, passwords,
+                or access tokens to version control.
+            </div>
+        </section>
+
+        <!-- Authentication -->
+        <section class="doc-section" id="authentication">
+            <h2><span class="glyphicon glyphicon-lock"></span> Authentication</h2>
+
+            <p>
+                Protected endpoints require a valid Sanctum access token
+                in the HTTP Authorization header.
+            </p>
+
+            <pre><code>Authorization: Bearer YOUR_ACCESS_TOKEN
+Accept: application/json</code></pre>
+
+            <h3>Login</h3>
+
+            <p><span class="label label-success">POST</span> <code>/api/login</code></p>
+
+            <pre><code>{
+    "email": "your-email@example.com",
+    "password": "your-password"
+}</code></pre>
+
+            <p>The response includes an access token to use in authenticated requests.</p>
+
+            <h3>Get authenticated user</h3>
+            <p><span class="label label-primary">GET</span> <code>/api/user</code></p>
+
+            <h3>Logout</h3>
+            <p><span class="label label-success">POST</span> <code>/api/logout</code></p>
+
+            <p>
+                Logout revokes the current access token. Subsequent requests
+                using that token should return <code>401 Unauthorized</code>.
+            </p>
+        </section>
+
+        <!-- Endpoints -->
+        <section class="doc-section" id="endpoints">
+            <h2><span class="glyphicon glyphicon-transfer"></span> Book Endpoints</h2>
+
+            <p>All book endpoints require authentication.</p>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="http-badge get">GET</span></td>
+                            <td><code>/api/books</code></td>
+                            <td>List the authenticated user's books</td>
+                        </tr>
+                        <tr>
+                            <td><span class="http-badge post">POST</span></td>
+                            <td><code>/api/books</code></td>
+                            <td>Create a book</td>
+                        </tr>
+                        <tr>
+                            <td><span class="http-badge get">GET</span></td>
+                            <td><code>/api/books/{id}</code></td>
+                            <td>Retrieve a specific book</td>
+                        </tr>
+                        <tr>
+                            <td><span class="http-badge put">PUT</span></td>
+                            <td><code>/api/books/{id}</code></td>
+                            <td>Update a book</td>
+                        </tr>
+                        <tr>
+                            <td><span class="http-badge patch">PATCH</span></td>
+                            <td><code>/api/books/{id}</code></td>
+                            <td>Partially update a book</td>
+                        </tr>
+                        <tr>
+                            <td><span class="http-badge delete">DELETE</span></td>
+                            <td><code>/api/books/{id}</code></td>
+                            <td>Delete a book</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Create a book</h3>
+
+            <p><span class="http-badge post">POST</span> <code>/api/books</code></p>
+
+            <pre><code>{
+    "name": "Clean Code",
+    "isbn": "9780132350884",
+    "value": 99.90
+}</code></pre>
+
+            <h3>Example response</h3>
+
+            <pre><code>{
+    "id": 1,
+    "user_id": 1,
+    "name": "Clean Code",
+    "isbn": "9780132350884",
+    "value": "99.90",
+    "created_at": "2026-01-01T12:00:00.000000Z",
+    "updated_at": "2026-01-01T12:00:00.000000Z"
+}</code></pre>
+
+            <div class="note">
+                This is an illustrative response. IDs and timestamps are generated
+                by the application, and the returned values depend on the request.
+                The decimal value is serialized as a string by the model's
+                <code>decimal:2</code> cast.
+            </div>
+        </section>
+
+        <!-- Validation -->
+        <section class="doc-section" id="validation">
+            <h2><span class="glyphicon glyphicon-list-alt"></span> Validation Rules</h2>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Create</th>
+                            <th>Update</th>
+                            <th>Rules</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>name</code></td>
+                            <td>Required</td>
+                            <td>Optional; required when provided</td>
+                            <td>String, maximum 255 characters</td>
+                        </tr>
+                        <tr>
+                            <td><code>isbn</code></td>
+                            <td>Optional</td>
+                            <td>Optional</td>
+                            <td>String containing digits only, or null</td>
+                        </tr>
+                        <tr>
+                            <td><code>value</code></td>
+                            <td>Optional</td>
+                            <td>Optional</td>
+                            <td>Numeric, minimum 0, or null</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <ul>
+                <li>On update, omitted fields remain unchanged.</li>
+                <li>An empty name is not accepted when the field is provided.</li>
+                <li>ISBN is stored as a string to preserve leading zeros.</li>
+                <li>Invalid input returns <code>422 Unprocessable Entity</code> in JSON format.</li>
+            </ul>
+        </section>
+
+        <!-- Security -->
+        <section class="doc-section" id="security">
+            <h2><span class="glyphicon glyphicon-shield"></span> Data Ownership &amp; Security</h2>
+
+            <ul>
+                <li>Book records are scoped to the authenticated user.</li>
+                <li>Users cannot retrieve, update, or delete another user's books.</li>
+                <li>Requests for books outside the user's scope return <code>404 Not Found</code>.</li>
+                <li>Requests to protected endpoints without valid authentication return <code>401 Unauthorized</code>.</li>
+                <li>Credentials and access tokens should never be committed to the repository.</li>
+            </ul>
+        </section>
+
+        <!-- Status Codes -->
+        <section class="doc-section" id="status-codes">
+            <h2><span class="glyphicon glyphicon-info-sign"></span> HTTP Status Codes</h2>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>200</code></td><td>Request successful</td></tr>
+                        <tr><td><code>201</code></td><td>Resource created successfully</td></tr>
+                        <tr><td><code>401</code></td><td>Authentication required or invalid</td></tr>
+                        <tr><td><code>404</code></td><td>Resource not found or outside the user's scope</td></tr>
+                        <tr><td><code>422</code></td><td>Validation error</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tests -->
+        <section class="doc-section" id="tests">
+            <h2><span class="glyphicon glyphicon-ok-circle"></span> Automated Tests</h2>
+
+            <p>Run the test suite with:</p>
+
+            <pre><code>php artisan test</code></pre>
+
+            <p>The feature tests cover:</p>
+
+            <ul>
+                <li>Authentication and logout.</li>
+                <li>Book creation, listing, retrieval, updating, and deletion.</li>
+                <li>Validation errors and partial updates.</li>
+                <li>User ownership and access restrictions.</li>
+                <li>JSON responses and unauthorized requests.</li>
+            </ul>
+
+            <div class="note">
+                The automated test suite uses an in-memory SQLite database,
+                keeping tests isolated from the development database.
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section class="doc-section" id="architecture">
+            <h2><span class="glyphicon glyphicon-folder-open"></span> Project Architecture</h2>
+
+            <ul>
+                <li><strong>Controllers:</strong> Handle HTTP requests and responses.</li>
+                <li><strong>Form Requests:</strong> Centralize request validation.</li>
+                <li><strong>Services:</strong> Encapsulate book management operations.</li>
+                <li><strong>Models:</strong> Represent users and books and their relationships.</li>
+                <li><strong>Feature Tests:</strong> Verify API behavior and access rules.</li>
+            </ul>
+        </section>
+
+        <!-- License -->
+        <section class="doc-section" id="license">
+            <h2><span class="glyphicon glyphicon-file"></span> License</h2>
+
+            <p>
+                Refer to the repository's <code>LICENSE</code> file if one is provided.
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>Book Registry API · Laravel REST API Documentation</p>
+            <a href="#top">Back to top ↑</a>
+        </footer>
+
+    </main>
+
+    <!-- jQuery and Bootstrap 3 JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        // Close the mobile navigation after selecting a section.
+        $(document).ready(function () {
+            $('.navbar-collapse a').click(function () {
+                $('.navbar-collapse').collapse('hide');
+            });
+        });
+    </script>
+
+</body>
+</html>
