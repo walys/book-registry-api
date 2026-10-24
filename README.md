@@ -5,7 +5,7 @@ A RESTful API built with Laravel for managing books, featuring token-based authe
 
 ## Documentation
 
-**[View Full Documentation](docs/index.html)**
+**[View Full Documentation](https://walys.github.io/book-registry-api-documentation/)**
 
 Explore the installation guide, authentication flow, API endpoints, validation rules, security, and automated tests.
 
