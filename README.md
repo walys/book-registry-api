@@ -1,58 +1,242 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Book Registry API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A RESTful API built with Laravel for managing books, featuring token-based authentication, CRUD operations, input validation, and user-specific data access.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- User authentication using Laravel Sanctum.
+- Login and logout endpoints.
+- Full CRUD operations for books.
+- Input validation using Laravel Form Requests.
+- User-specific data access and ownership protection.
+- JSON responses for API requests.
+- Automated feature tests.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.3
+- Laravel 13
+- Laravel Sanctum
+- MySQL for development
+- SQLite in-memory database for automated tests
+- PHPUnit
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP compatible with the project's dependencies.
+- Composer.
+- MySQL.
+- Required PHP extensions for Laravel and the project.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clone the repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone YOUR_REPOSITORY_URL
+cd book-registry-api
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Replace `YOUR_REPOSITORY_URL` with the actual repository URL.
 
-## Contributing
+### 2. Install dependencies
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+### 3. Configure environment variables
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Create your environment file:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+On Windows, you can also copy `.env.example` to `.env` manually.
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+Configure your database connection in the `.env` file:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=book_registry_api
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+Create the configured database in MySQL, then run the migrations:
+
+```bash
+php artisan migrate
+```
+
+### 4. Start the development server
+
+```bash
+php artisan serve
+```
+
+By default, the API will be available at:
+
+`http://127.0.0.1:8000`
+
+> **Security note:** Never commit your `.env` file, passwords, access tokens, or other sensitive information to version control.
+
+## Authentication
+
+The API uses Laravel Sanctum personal access tokens for authentication.
+
+Protected endpoints require a Bearer token in the request headers:
+
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Accept: application/json
+```
+
+### Login
+
+**Endpoint:** `POST /api/login`
+
+Request body:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+A successful response includes an access token, token type, user information, and a confirmation message.
+
+Use the returned token to authenticate subsequent requests.
+
+### Logout
+
+**Endpoint:** `POST /api/logout`
+
+Requires authentication. Revokes the current access token.
+
+### Get the authenticated user
+
+**Endpoint:** `GET /api/user`
+
+Returns information about the currently authenticated user.
+
+## Book Endpoints
+
+All book endpoints require authentication.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/books` | List the authenticated user's books |
+| POST | `/api/books` | Create a book |
+| GET | `/api/books/{id}` | Retrieve a specific book |
+| PUT | `/api/books/{id}` | Update a book |
+| PATCH | `/api/books/{id}` | Partially update a book |
+| DELETE | `/api/books/{id}` | Delete a book |
+
+### Create a Book
+
+**Endpoint:** `POST /api/books`
+
+Request body:
+
+```json
+{
+  "name": "Clean Code",
+  "isbn": "9780132350884",
+  "value": 99.90
+}
+```
+
+Example successful response:
+
+```json
+{
+  "name": "Clean Code",
+  "isbn": "9780132350884",
+  "value": "99.90"
+}
+```
+
+The actual response also includes the model's other serialized fields, such as its ID, user ID, and timestamps.
+
+### Validation Rules
+
+| Field | Rules |
+|---|---|
+| `name` | Required when creating a book; must be a string with a maximum length of 255 characters |
+| `isbn` | Optional; must contain digits only when provided |
+| `value` | Optional; must be numeric and greater than or equal to zero |
+
+Additional behavior:
+
+- ISBN values are stored as strings to preserve leading zeros.
+- During updates, omitted fields remain unchanged.
+- If `name` is provided during an update, it cannot be empty.
+- Optional `isbn` and `value` fields can be set to `null`.
+
+## Data Ownership and Security
+
+Each book belongs to a user through the `User`–`Book` relationship.
+
+Book queries are scoped to the authenticated user, preventing users from accessing or modifying books owned by other accounts.
+
+Requests for books that do not exist or do not belong to the authenticated user return `404 Not Found`.
+
+Unauthenticated requests to protected endpoints return `401 Unauthorized`.
+
+## HTTP Status Codes
+
+| Status Code | Description |
+|---|---|
+| `200 OK` | Request completed successfully |
+| `201 Created` | Resource created successfully |
+| `401 Unauthorized` | Authentication is missing or invalid |
+| `404 Not Found` | Resource not found or not accessible to the current user |
+| `422 Unprocessable Entity` | Validation failed |
+
+## Running Tests
+
+Run the automated test suite:
+
+```bash
+php artisan test
+```
+
+The feature tests cover:
+
+- Authentication and authorization.
+- Successful login and logout.
+- Book creation, retrieval, listing, updating, and deletion.
+- Input validation.
+- Partial updates.
+- User-specific data access.
+- JSON error responses.
+- Protection against unauthorized access.
+
+Tests use an in-memory SQLite database, as configured in the test environment, to isolate test data from the development database.
+
+## Architecture
+
+The application separates responsibilities across several layers:
+
+- **Controllers:** Handle HTTP requests and build API responses.
+- **Form Requests:** Define and enforce request validation rules.
+- **Services:** Encapsulate book-related application operations.
+- **Models:** Represent database entities and their relationships.
+- **Feature Tests:** Verify API behavior through HTTP requests.
+
+This structure improves maintainability, readability, and testability.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Refer to the repository's `LICENSE` file, if available, for licensing information.
