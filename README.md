@@ -2,6 +2,15 @@
 
 A RESTful API built with Laravel for managing books, featuring token-based authentication, CRUD operations, input validation, and user-specific data access.
 
+**Navigation**
+
+[Features](#features) · [Tech Stack](#tech-stack) · [Requirements](#requirements) · [Installation](#installation)
+
+[Authentication](#authentication) · [API Endpoints](#book-endpoints) · [Validation](#validation-rules) · [Security](#data-ownership-and-security)
+
+[Status Codes](#http-status-codes) · [Testing](#running-tests) · [Architecture](#architecture) · [Scalability](#scalability-and-future-improvements)
+
+
 ## Features
 
 - User authentication using Laravel Sanctum.
@@ -77,6 +86,7 @@ Create the configured database in MySQL, then run the migrations:
 ```bash
 php artisan migrate
 ```
+Create user
 
 ```bash
 php artisan db:seed
