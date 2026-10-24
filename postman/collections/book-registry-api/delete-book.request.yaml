@@ -1,0 +1,11 @@
+$kind: http-request
+url: http://127.0.0.1:8000/api/books/1
+method: DELETE
+body:
+  type: json
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: 2|Pp3XxQuoLHgAajMei7ur4MiNJiVO0H6ZQwRWWUw786204749
+order: 4000

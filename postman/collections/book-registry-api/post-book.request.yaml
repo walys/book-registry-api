@@ -1,0 +1,19 @@
+$kind: http-request
+url: http://127.0.0.1:8000/api/books
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Clean Code 2\",\r
+
+    \    \"isbn\": \"9780132350884\",\r
+
+    \    \"value\": 89.90\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: 2|Pp3XxQuoLHgAajMei7ur4MiNJiVO0H6ZQwRWWUw786204749
+order: 6000

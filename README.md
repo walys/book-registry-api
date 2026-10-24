@@ -78,6 +78,10 @@ Create the configured database in MySQL, then run the migrations:
 php artisan migrate
 ```
 
+```bash
+php artisan db:seed
+```
+
 ### 4. Start the development server
 
 ```bash
